@@ -2,6 +2,7 @@ import os
 import copy
 import glob
 import glob2
+import pickle
 import numpy as np
 import colorsys
 
@@ -232,5 +233,15 @@ def load_list_from_folder(folder_path, ext_filter=None, depth=1, recursive=False
 
     return fulllist, num_elem
 
+def load_list_from_pkl(folder_path, filename):
+    file = os.path.join(folder_path, filename)
+    with open("D:\\DeepLearning\\3DTracking\\data\\WAYMO\\car_3d_det\\prediction.pkl", 'rb') as f:
+        detection_pkl = pickle.load(f)
+
+
+    detection_results = detection_pkl[0]
+    bboxes = detection_results['box3d_lidar']
+    scores = detection_results['scores']
+    labels = detection_results['label_preds']
 
 

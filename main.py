@@ -4,7 +4,7 @@ import time
 import os.path
 import numpy as np
 from tracker.tracking import MOT3D
-from utils.general import load_list_from_folder, fileparts, mkdir_if_missing
+from utils.general import load_list_from_folder, load_list_from_pkl, fileparts, mkdir_if_missing
 
 
 if __name__ == '__main__':
@@ -14,6 +14,11 @@ if __name__ == '__main__':
     # KITTI dataset format
     det_id2str = {1: 'Pedestrian', 2: 'Car', 3: 'Cyclist'}
     seq_file_list, num_seq = load_list_from_folder(os.path.join('data/KITTI', result_sha))
+
+    # WAYMO dataset format
+    pkl = "prediction.pkl"
+    det_id2str = {0: 'Car', 1: 'Truck', 2: 'Bus'}
+    seq_file_list, num_seq = load_list_from_pkl('.//data//WAYMO//car_3d_det', pkl)
 
     total_time = 0.0
     total_frames = 0
